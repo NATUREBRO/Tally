@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 基础外观配置 -->
+    <style name="Base.Theme.BudgetApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/app_yellow</item>
+        <item name="android:statusBarColor">@color/app_yellow</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- 用于隐藏底栏选中时的椭圆背景 -->
+    <style name="TransparentIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <!-- !!! 这一行非常重要，Manifest 找的就是这个名字 !!! -->
+    <style name="Theme.BudgetApp" parent="Base.Theme.BudgetApp" />
+</resources>

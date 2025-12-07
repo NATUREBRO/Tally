@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.BudgetApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 主色调 (会引用 values-night/colors.xml 里的蓝色) -->
+        <item name="colorPrimary">@color/app_yellow</item>
+
+        <!-- 状态栏背景色 -->
+        <item name="android:statusBarColor">@color/app_yellow</item>
+
+        <!-- !!! 关键修改：夜间模式下，状态栏图标设为白色 (false) !!! -->
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- 窗口背景 -->
+        <item name="android:windowBackground">@color/app_background</item>
+    </style>
+
+    <style name="Theme.BudgetApp" parent="Base.Theme.BudgetApp" />
+</resources>

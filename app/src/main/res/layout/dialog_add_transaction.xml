@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="12dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- 标题/日期：加粗，大字号 -->
+        <TextView
+            android:id="@+id/tv_dialog_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2024-01-01"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- 收支类型选择：平分宽度 -->
+        <RadioGroup
+            android:id="@+id/rg_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/rb_expense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="支出"
+                android:textSize="16sp"
+                android:textColor="@color/text_primary"
+                android:buttonTint="@color/expense_green"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_income"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="收入"
+                android:textSize="16sp"
+                android:textColor="@color/text_primary"
+                android:buttonTint="@color/income_red"/>
+        </RadioGroup>
+
+        <!-- 分类选择 (横向滚动)：修复了之前的报错 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp">
+
+            <RadioGroup
+                android:id="@+id/rg_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="饮食"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/text_secondary"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/rb_fun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="娱乐"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/text_secondary"/>
+
+                <RadioButton
+                    android:id="@+id/rb_edu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="教育"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/text_secondary"/>
+
+                <RadioButton
+                    android:id="@+id/rb_shop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="网购"
+                    android:paddingEnd="12dp"
+                    android:textColor="@color/text_secondary"/>
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <!-- 金额输入框 -->
+        <EditText
+            android:id="@+id/et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+
+            android:background="@drawable/bg_input_field"
+
+            android:hint="输入金额"
+            android:inputType="numberDecimal"
+
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
+            android:textSize="18sp"
+
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- 确认按钮：黄色主题 -->
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="确  认"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/app_yellow"
+            app:cornerRadius="8dp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
