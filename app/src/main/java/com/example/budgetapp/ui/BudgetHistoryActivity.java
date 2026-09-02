@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.budgetapp.R;
 import com.example.budgetapp.database.Goal;
 import com.example.budgetapp.database.Transaction;
+import com.example.budgetapp.util.BudgetCalculator;
 import com.example.budgetapp.viewmodel.FinanceViewModel;
 
 import java.time.Instant;
@@ -151,7 +152,9 @@ public class BudgetHistoryActivity extends AppCompatActivity {
                 currentMonthExpense = 0;
             }
 
-            double dailyBudget = (activeMonthBudget > 0) ? ((double) activeMonthBudget / d.lengthOfMonth()) : 0;
+            double dailyBudget = activeMonthBudget > 0
+                    ? BudgetCalculator.distributeEvenly(activeMonthBudget, d.lengthOfMonth())
+                    .get(d.getDayOfMonth() - 1) : 0;
             double expenseToday = 0;
             long startOfDay = d.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
             long endOfDay = d.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();

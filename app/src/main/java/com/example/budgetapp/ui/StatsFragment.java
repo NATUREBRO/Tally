@@ -863,6 +863,8 @@ public class StatsFragment extends Fragment {
                     updateT.id = existingTransaction.id;
                     updateT.assetId = selectedAssetId;
                     updateT.subCategory = selectedSubCategory[0]; // 【新增】更新二级分类
+                    updateT.spreadStartDate = existingTransaction.spreadStartDate;
+                    updateT.spreadEndDate = existingTransaction.spreadEndDate;
                     // 【修复】使用带资产同步的方法
                     viewModel.updateTransactionWithAssetSync(existingTransaction, updateT);
                 }

@@ -157,7 +157,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
         long end = date.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
         for (Transaction t : transactions) {
-            if (t.date >= start && t.date < end) {
+            double dayAmount = com.example.budgetapp.util.BudgetCalculator.amountForDay(t, date);
+            if (dayAmount > 0 || (t.date >= start && t.date < end && t.amount == 0)) {
 
                 // 🌟 核心拦截：如果是资产互转，直接跳过，不参与日历下方任何数字的计算
                 boolean isTransfer = (t.type == 2) || "资产互转".equals(t.category);
@@ -167,25 +168,25 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
                 // <--- 2. 新增这块：只要是支出(type==0)，就累加到预算统计里 --->
                 if (t.type == 0) {
-                    dailyExpenseForBudget += t.amount;
+                    dailyExpenseForBudget += dayAmount;
                 }
 
                 switch (filterMode) {
                     case 0: // 结余
                         if (t.type == 1) {
-                            if (!"加班".equals(t.category)) dailySum += t.amount;
+                            if (!"加班".equals(t.category)) dailySum += dayAmount;
                         } else if (t.type == 0) { // 🌟 严格限制只有真正的支出才减去金额
-                            dailySum -= t.amount;
+                            dailySum -= dayAmount;
                         }
                         break;
                     case 1: // 收入
-                        if (t.type == 1 && !"加班".equals(t.category)) dailySum += t.amount;
+                        if (t.type == 1 && !"加班".equals(t.category)) dailySum += dayAmount;
                         break;
                     case 2: // 支出
-                        if (t.type == 0) dailySum += t.amount;
+                        if (t.type == 0) dailySum += dayAmount;
                         break;
                     case 3: // 加班工资
-                        if (t.type == 1 && "加班".equals(t.category)) dailySum += t.amount;
+                        if (t.type == 1 && "加班".equals(t.category)) dailySum += dayAmount;
                         break;
                     case 4: // 加班工时
                         if (t.type == 1 && "加班".equals(t.category)) {
@@ -198,7 +199,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
                                 }
                             }
                             // 赋值 dailySum 让底部判断有数据
-                            dailySum += t.amount;
+                            dailySum += dayAmount;
                         }
                         break;
                 }

@@ -63,7 +63,8 @@ public interface TransactionDao {
     // 使用普通的 LiveData<List<Transaction>> 返回类型，并加上金额筛选条件和资产筛选
     @Query("SELECT t.* FROM transactions t " +
             "LEFT JOIN asset_accounts a ON t.assetId = a.id " +
-            "WHERE t.date BETWEEN :startDate AND :endDate " +
+            "WHERE ((t.date >= :startDate AND t.date < :endDate) OR " +
+            "(t.spreadStartDate > 0 AND t.spreadStartDate < :endDate AND t.spreadEndDate >= :startDate)) " +
             "AND (:type IS NULL OR t.type = :type) " +
             "AND (:minAmount IS NULL OR t.amount >= :minAmount) " +
             "AND (:maxAmount IS NULL OR t.amount <= :maxAmount) " +
